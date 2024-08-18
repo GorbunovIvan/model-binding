@@ -1,0 +1,1 @@
+This project shows how to implement communication between two services without cyclic reference issues.

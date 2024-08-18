@@ -3,6 +3,7 @@ package org.example.service;
 import lombok.RequiredArgsConstructor;
 import org.example.model.User;
 import org.example.repository.UserRepository;
+import org.example.service.modelsBinding.ModelBinder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,21 +14,26 @@ import java.util.Set;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final ModelBinder modelBinder;
 
     public List<User> getAll() {
-        return userRepository.getAll();
+        var result = userRepository.getAll();
+        return modelBinder.bindFields(result);
     }
 
     public User getById(Integer id) {
-        return userRepository.getById(id);
+        var result = userRepository.getById(id);
+        return modelBinder.bindFields(result);
     }
 
     public List<User> getByIds(Set<Integer> ids) {
-        return userRepository.getByIds(ids);
+        var result = userRepository.getByIds(ids);
+        return modelBinder.bindFields(result);
     }
 
     public User create(User user) {
-        return userRepository.create(user);
+        var result = userRepository.create(user);
+        return modelBinder.bindFields(result);
     }
 
     public void deleteById(Integer id) {

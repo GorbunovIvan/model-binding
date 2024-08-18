@@ -8,9 +8,15 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @EqualsAndHashCode(of = { "name", "user", "createdAt" })
 @ToString
-public class Product {
+public class Product implements PersistedModel<Long> {
+
     private Long id;
     private String name;
     private User user;
     private LocalDateTime createdAt;
+
+    @Override
+    public Long getUniqueIdentifierForBindingWithOtherServices() {
+        return getId();
+    }
 }
